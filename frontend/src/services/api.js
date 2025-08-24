@@ -102,7 +102,8 @@ export const dashboardAPI = {
 };
 
 // Admin API
+// new user admin
 export const registerAdmin = (adminData) =>
-  api.post("/admin/register", adminData);
+  api.post("/auth/register", adminData);
 
 export default api;

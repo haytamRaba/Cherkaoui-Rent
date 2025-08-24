@@ -4,7 +4,16 @@ import { useTranslation } from "react-i18next";
 
 export default function AdminRegister() {
   const { t } = useTranslation();
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  // const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({
+  username: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  role: "admin" 
+});
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -21,7 +30,14 @@ export default function AdminRegister() {
     try {
       await registerAdmin(form);
       setSuccess(true);
-      setForm({ name: "", email: "", password: "" });
+      setForm({
+      username: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      role: "admin"
+    });
     } catch (err) {
       setError(err?.response?.data?.message || t("Erreur lors de la création"));
     }
@@ -35,18 +51,48 @@ export default function AdminRegister() {
       </h2>
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="block mb-1 text-sm font-medium text-gray-700">
-            {t("Nom")}
-          </label>
-          <input
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            placeholder={t("Nom")}
-            required
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-        </div>
+  <label className="block mb-1 text-sm font-medium text-gray-700">
+    {t("Nom d’utilisateur")}
+  </label>
+  <input
+    name="username"
+    value={form.username}
+    onChange={handleChange}
+    placeholder={t("Nom d’utilisateur")}
+    required
+    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+  />
+</div>
+
+<div>
+  <label className="block mb-1 text-sm font-medium text-gray-700">
+    {t("Prénom")}
+  </label>
+  <input
+    name="firstName"
+    value={form.firstName}
+    onChange={handleChange}
+    placeholder={t("Prénom")}
+    required
+    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+  />
+</div>
+
+<div>
+  <label className="block mb-1 text-sm font-medium text-gray-700">
+    {t("Nom")}
+  </label>
+  <input
+    name="lastName"
+    value={form.lastName}
+    onChange={handleChange}
+    placeholder={t("Nom")}
+    required
+    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+  />
+</div>
+
+
         <div>
           <label className="block mb-1 text-sm font-medium text-gray-700">
             {t("Email")}
@@ -61,6 +107,7 @@ export default function AdminRegister() {
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
+
         <div>
           <label className="block mb-1 text-sm font-medium text-gray-700">
             {t("Mot de passe")}
@@ -75,6 +122,7 @@ export default function AdminRegister() {
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
+
         <button
           type="submit"
           disabled={loading}
