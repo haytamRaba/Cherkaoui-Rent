@@ -45,16 +45,16 @@ export const authAPI = {
   getMe: () => api.get("/auth/me"),
   updatePreferences: (preferences) => api.put("/auth/preferences", preferences),
   changePassword: (passwords) => api.post("/auth/change-password", passwords),
-  
-  updateProfile: (userData) => {
-    const token = localStorage.getItem('token'); // ou où vous stockez le token
-    return axios.put('/api/auth/profile', userData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    });
-  }
+    updateProfile: (userData) => api.put("/auth/profile", userData),
+  // updateProfile: (userData) => {
+  //   const token = localStorage.getItem('token'); // ou où vous stockez le token
+  //   return axios.put('/api/auth/profile', userData, {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //       'Content-Type': 'application/json'
+  //     }
+  //   });
+  // }
 };
 
 // Vehicles API

@@ -135,12 +135,7 @@ const Dashboard = () => {
       icon: Users,
       color: "text-purple-600",
     },
-    {
-      title: t("vehiclesInMaintenance", "Véhicules en maintenance"),
-      value: vehicleStatus.maintenance || 0,
-      icon: Car,
-      color: "text-yellow-700",
-    },
+  
   ];
 
   return (
