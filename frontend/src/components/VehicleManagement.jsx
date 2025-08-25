@@ -503,7 +503,6 @@ const VehicleManagement = ({ vehicleRefreshFlag = 0 }) => {
  
   const handleStatusChange = async (vehicleId, newStatus) => {
     try {
-      // Créer un FormData avec seulement le statut
       const formData = new FormData();
       formData.append('status', newStatus);
       

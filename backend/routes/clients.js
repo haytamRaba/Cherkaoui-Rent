@@ -1,6 +1,5 @@
 
 
-
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
@@ -94,11 +93,21 @@ router.delete('/:id/documents/:type', auth, async (req, res) => {
 router.get('/', auth, [
   query('page').optional().isInt({ min: 1 }).withMessage('Page must be a positive integer'),
   query('limit').optional().isInt({ min: 1, max: 100 }).withMessage('Limit must be between 1 and 100'),
-  query('status').optional().isIn(['active', 'blacklisted', 'suspended']).withMessage('Invalid status')
+  // Correction: accepter les chaînes vides pour status
+  query('status').optional().custom(value => {
+    // Accepter les valeurs vides/nulles ou les statuts valides
+    if (!value || value === '' || value === null || value === undefined) return true;
+    return ['active', 'blacklisted', 'suspended'].includes(value);
+  }).withMessage('Invalid status')
 ], async (req, res) => {
   try {
+    // Debug logs
+    console.log('=== DEBUG GET CLIENTS ===');
+    console.log('Query params:', req.query);
+    
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log('Validation errors:', errors.array());
       return res.status(400).json({ errors: errors.array() });
     }
 
@@ -106,19 +115,22 @@ router.get('/', auth, [
     const limit = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * limit;
 
-    // Build filter object
+    // Build filter object - ne pas ajouter status s'il est vide
     const filter = {};
-    if (req.query.status) filter.status = req.query.status;
-    if (req.query.search) {
+    if (req.query.status && req.query.status.trim() !== '') {
+      filter.status = req.query.status;
+    }
+    if (req.query.search && req.query.search.trim() !== '') {
       filter.$or = [
         { firstName: new RegExp(req.query.search, 'i') },
         { lastName: new RegExp(req.query.search, 'i') },
-        { email: new RegExp(req.query.search, 'i') },
         { phone: new RegExp(req.query.search, 'i') },
         { nationalId: new RegExp(req.query.search, 'i') },
         { licenseNumber: new RegExp(req.query.search, 'i') }
       ];
     }
+
+    console.log('Filter applied:', filter);
 
     const clients = await Client.find(filter)
       .select('-documents') // Exclude documents for list view
@@ -127,6 +139,8 @@ router.get('/', auth, [
       .limit(limit);
 
     const total = await Client.countDocuments(filter);
+
+    console.log(`Found ${clients.length} clients out of ${total} total`);
 
     res.json({
       clients,
@@ -170,7 +184,6 @@ router.get('/:id', auth, async (req, res) => {
 router.post('/', auth, [
   body('firstName').notEmpty().trim().withMessage('First name is required'),
   body('lastName').notEmpty().trim().withMessage('Last name is required'),
-  body('email').isEmail().normalizeEmail().withMessage('Please enter a valid email'),
   body('phone').notEmpty().trim().withMessage('Phone number is required'),
   body('dateOfBirth').isISO8601().withMessage('Invalid date of birth'),
   body('nationalId').notEmpty().trim().withMessage('National ID is required'),
@@ -182,32 +195,49 @@ router.post('/', auth, [
   body('address.country').optional().trim()
 ], async (req, res) => {
   try {
+    console.log('=== DEBUG CRÉATION CLIENT ===');
+    console.log('Données reçues:', req.body);
+    
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
-    const {
-      firstName, lastName, email, phone, dateOfBirth, nationalId,
-      licenseNumber, licenseExpiryDate, address, notes
-    } = req.body;
-
-    // Check if client already exists
-    const existingClient = await Client.findOne({
-      $or: [{ email }, { nationalId }, { licenseNumber }]
-    });
-
-    if (existingClient) {
-      let field = 'email';
-      if (existingClient.nationalId === nationalId) field = 'national ID';
-      if (existingClient.licenseNumber === licenseNumber) field = 'license number';
-      
-      return res.status(400).json({
-        message: `Client already exists with this ${field}`
+      console.log('Erreurs de validation:', errors.array());
+      return res.status(400).json({ 
+        message: 'Validation errors',
+        errors: errors.array() 
       });
     }
 
-    // Check if client is at least 21 years old
+    const {
+      firstName, lastName, phone, dateOfBirth, nationalId,
+      licenseNumber, licenseExpiryDate, address, notes, status, blacklistReason
+    } = req.body;
+
+    console.log('Données destructurées:', {
+      firstName, lastName, phone, dateOfBirth, nationalId,
+      licenseNumber, licenseExpiryDate, status
+    });
+
+    // Vérification sans email
+    const existingClient = await Client.findOne({
+      $or: [{ nationalId }, { licenseNumber }]
+    });
+
+    if (existingClient) {
+      let field = 'national ID';
+      let value = nationalId;
+      
+      if (existingClient.licenseNumber === licenseNumber) {
+        field = 'license number';
+        value = licenseNumber;
+      }
+      
+      console.log(`Client existant détecté - ${field}: ${value}`);
+      return res.status(400).json({
+        message: `Un client existe déjà avec ce ${field === 'national ID' ? 'CIN' : 'numéro de permis'}: ${value}`
+      });
+    }
+
+    // Validation âge
     const birthDate = new Date(dateOfBirth);
     const today = new Date();
     let age = today.getFullYear() - birthDate.getFullYear();
@@ -217,40 +247,83 @@ router.post('/', auth, [
     }
 
     if (age < 21) {
+      console.log(`Client trop jeune: ${age} ans`);
       return res.status(400).json({
-        message: 'Client must be at least 21 years old'
+        message: `Le client doit avoir au moins 21 ans (âge actuel: ${age} ans)`
       });
     }
 
-    // Check if license is not expired
+    // Validation expiration permis
     if (new Date(licenseExpiryDate) <= new Date()) {
+      console.log('Permis expiré:', licenseExpiryDate);
       return res.status(400).json({
-        message: 'License is expired'
+        message: 'Le permis de conduire est expiré'
       });
     }
 
-    const client = new Client({
+    // Création sans email
+    const clientData = {
       firstName,
       lastName,
-      email,
       phone,
       dateOfBirth,
       nationalId,
       licenseNumber,
       licenseExpiryDate,
-      address,
-      notes
-    });
+      status: status || 'active'
+    };
 
+    // Ajouter les champs optionnels s'ils existent
+    if (address) clientData.address = address;
+    if (notes) clientData.notes = notes;
+    if (blacklistReason) clientData.blacklistReason = blacklistReason;
+
+    console.log('Données pour création:', clientData);
+
+    const client = new Client(clientData);
     await client.save();
 
+    console.log('Client créé avec succès:', client._id);
+
     res.status(201).json({
-      message: 'Client created successfully',
-      client
+      message: 'Client créé avec succès',
+      data: client
     });
+
   } catch (error) {
-    console.error('Create client error:', error);
-    res.status(500).json({ message: 'Server error' });
+    console.error('=== ERREUR CRÉATION CLIENT ===');
+    console.error('Type d\'erreur:', error.name);
+    console.error('Message:', error.message);
+    console.error('Stack:', error.stack);
+
+    // Gestion des erreurs de validation Mongoose
+    if (error.name === 'ValidationError') {
+      const validationErrors = {};
+      Object.keys(error.errors).forEach(key => {
+        validationErrors[key] = error.errors[key].message;
+      });
+      console.log('Erreurs de validation Mongoose:', validationErrors);
+      return res.status(400).json({ 
+        message: 'Erreurs de validation',
+        errors: validationErrors 
+      });
+    }
+
+    // Gestion des erreurs de contrainte unique
+    if (error.code === 11000) {
+      const field = Object.keys(error.keyValue)[0];
+      const fieldName = field === 'nationalId' ? 'CIN' : 
+                       field === 'licenseNumber' ? 'numéro de permis' : field;
+      console.log('Erreur contrainte unique:', field, error.keyValue[field]);
+      return res.status(400).json({ 
+        message: `Ce ${fieldName} existe déjà: ${error.keyValue[field]}`
+      });
+    }
+
+    res.status(500).json({ 
+      message: 'Erreur interne du serveur',
+      error: error.message 
+    });
   }
 });
 
@@ -260,7 +333,6 @@ router.post('/', auth, [
 router.put('/:id', auth, [
   body('firstName').optional().notEmpty().trim().withMessage('First name cannot be empty'),
   body('lastName').optional().notEmpty().trim().withMessage('Last name cannot be empty'),
-  body('email').optional().isEmail().normalizeEmail().withMessage('Please enter a valid email'),
   body('phone').optional().notEmpty().trim().withMessage('Phone number cannot be empty'),
   body('dateOfBirth').optional().isISO8601().withMessage('Invalid date of birth'),
   body('nationalId').optional().notEmpty().trim().withMessage('National ID cannot be empty'),
@@ -284,14 +356,11 @@ router.put('/:id', auth, [
       return res.status(404).json({ message: 'Client not found' });
     }
 
-    // Check for duplicate email, nationalId, or licenseNumber if being updated
-    if (req.body.email || req.body.nationalId || req.body.licenseNumber) {
+    // Check for duplicate nationalId or licenseNumber if being updated
+    if (req.body.nationalId || req.body.licenseNumber) {
       const duplicateQuery = { _id: { $ne: req.params.id } };
       const orConditions = [];
-      
-      if (req.body.email && req.body.email !== client.email) {
-        orConditions.push({ email: req.body.email });
-      }
+
       if (req.body.nationalId && req.body.nationalId !== client.nationalId) {
         orConditions.push({ nationalId: req.body.nationalId });
       }
@@ -304,9 +373,10 @@ router.put('/:id', auth, [
         const existingClient = await Client.findOne(duplicateQuery);
         
         if (existingClient) {
-          let field = 'email';
-          if (req.body.nationalId && existingClient.nationalId === req.body.nationalId) field = 'national ID';
-          if (req.body.licenseNumber && existingClient.licenseNumber === req.body.licenseNumber) field = 'license number';
+          let field = 'national ID';
+          if (req.body.licenseNumber && existingClient.licenseNumber === req.body.licenseNumber) {
+            field = 'license number';
+          }
           
           return res.status(400).json({
             message: `Another client already exists with this ${field}`
@@ -493,4 +563,3 @@ router.put('/:id/blacklist', [auth, authorize('admin', 'manager')], [
 });
 
 module.exports = router;
-
