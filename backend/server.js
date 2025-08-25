@@ -68,10 +68,6 @@ app.use('/api/vehicleAdmin', require('./routes/vehicleAdmin'));
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
-app.get("/", (req, res) => {
-  res.send("Backend is running ✅");
-});
-
 
 // --- Error handling ---
 app.use((err, req, res, next) => {
@@ -85,5 +81,9 @@ app.use('*', (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
+});
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
