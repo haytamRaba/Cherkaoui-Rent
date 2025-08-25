@@ -68,6 +68,10 @@ app.use('/api/vehicleAdmin', require('./routes/vehicleAdmin'));
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
+app.get("/", (req, res) => {
+  res.send("Backend is running ✅");
+});
+
 
 // --- Error handling ---
 app.use((err, req, res, next) => {
