@@ -41,7 +41,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/* Force simple colors pour PDF */
+
 .force-simple-colors * {
   color: black !important;
   background-color: white !important;
@@ -125,9 +125,6 @@
   }
 }
 
-/* === CORRECTIONS POUR PAGINATION CONSISTANTE === */
-
-/* Styles d'impression globaux */
 @media print {
   body * {
     visibility: hidden;
@@ -701,7 +698,7 @@
   margin-top: 8px !important;
 }
 
-/* OVERRIDE COMPLET DES RESPONSIVE POUR LES ARTICLES */
+
 @media (max-width: 768px) {
   .contract-grid {
     grid-template-columns: 1fr 1fr !important; /* FORCER 2 colonnes */
@@ -731,7 +728,7 @@
   line-height: 1.1 !important;
 }
 
-/* Optimisation pour html2pdf */
+
 .force-simple-colors * {
   -webkit-print-color-adjust: exact !important;
   print-color-adjust: exact !important;
