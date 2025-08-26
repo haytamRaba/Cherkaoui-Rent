@@ -54,7 +54,7 @@ const Login = ({ onLogin }) => {
             <Car className="h-12 w-12 text-blue-600" />
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-            AutoRent Cherkaoui
+             Cherkaoui AutoRent
           </h2>
           <p className="mt-2 text-sm text-gray-600">
             {showRegisterForm ? t("Créer un compte admin") : t("Connectez-vous à votre compte")}
