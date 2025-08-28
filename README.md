@@ -5,7 +5,7 @@
 ![React](https://img.shields.io/badge/React-18+-blue)
 ![MongoDB](https://img.shields.io/badge/MongoDB-6.0+-brightgreen)
 
-##  Description
+## 1. Description
 
 Cherkaoui AutoRent  est une application web complète de gestion de location de voitures développée spécifiquement pour les entreprises de location au Maroc. L'application offre une interface bilingue (français/arabe) avec support RTL complet et toutes les fonctionnalités nécessaires pour gérer efficacement une entreprise de location de véhicules.
 Cette solution moderne combine une interface utilisateur intuitive avec un backend robuste pour offrir une expérience de gestion complète, de la réservation à la facturation, en passant par la maintenance des véhicules.
@@ -53,7 +53,7 @@ Cette solution moderne combine une interface utilisateur intuitive avec un backe
 
 
 ## Table des Matières
-1. [Description](#-description)
+1. [Description](#-Description)
 2. [Fonctionnalités](#-fonctionnalités-principales)
 3. [Technologies](#-technologies-utilisées)
 4. [Installation](#-installation-et-configuration-windows)
@@ -64,7 +64,7 @@ Cette solution moderne combine une interface utilisateur intuitive avec un backe
 9. [Licence](#-licence)
 
 
-## ✨ Fonctionnalités Principales
+## 2. Fonctionnalités Principales
 
 ### ✅ **Fonctionnalités Implémentées et Testées**
 
@@ -139,7 +139,7 @@ Cette solution moderne combine une interface utilisateur intuitive avec un backe
 - Prévisions de revenus et de demande
 - Exportation vers Excel et PDF
 
-## 🛠️ Technologies Utilisées
+## 3. Technologies Utilisées
 
 ### **Backend (API REST)**
 - **Node.js 18+** - Runtime JavaScript haute performance
@@ -169,7 +169,7 @@ Cette solution moderne combine une interface utilisateur intuitive avec un backe
 - **Prettier** - Formateur de code automatique
 - **Nodemon** - Rechargement automatique du serveur en développement
 
-## 🖥️ Installation et Configuration (Windows)
+## 4. Installation et Configuration (Windows)
 
 ### **Prérequis Système**
 
@@ -339,7 +339,7 @@ Mot de passe : cherkaoui123
 
 > **Note importante** : L'email sera automatiquement normalisé en minuscules par le système, donc `Cherkaoui@admin.com` devient `cherkaoui@admin.com` en interne, mais vous pouvez utiliser la casse originale pour vous connecter.
 
-## 🎯 Guide d'Utilisation
+## 5. Guide d'Utilisation
 
 ### **Première Connexion**
 
@@ -394,7 +394,7 @@ Le tableau de bord offre une vue d'ensemble de votre activité :
 - **Sécurité** : Changer le mot de passe
 - **Déconnexion** : Bouton en haut à droite
 
-## 🏗️ Structure du Projet
+##  Structure du Projet
 
 ```
 autorent-cherkaoui/
@@ -440,7 +440,7 @@ autorent-cherkaoui/
 └── 📄 requirements_analysis.md             # Analyse des exigences
 ```
 
-## 🔌 Documentation de l'API
+## 6. Documentation de l'API
 
 ### **Endpoints d'Authentification**
 
@@ -549,7 +549,7 @@ Données de revenus avec filtres temporels.
 #### **GET /api/dashboard/alerts**
 Alertes et notifications importantes.
 
-## 🚀 Déploiement en Production
+## 7.  Déploiement en Production
 
 ### **Préparation pour la Production**
 
@@ -609,7 +609,7 @@ EXPOSE 5001
 CMD ["npm", "start"]
 ```
 
-## 🔧 Développement et Personnalisation
+##  Développement et Personnalisation
 
 ### **Scripts de Développement**
 
@@ -709,7 +709,7 @@ const resources = {
 3. **Audit des actions** utilisateur
 4. **Gestion des sessions** avec timeout automatique
 
-## 🐛 Dépannage
+##  Dépannage
 
 ### **Problèmes Courants**
 
@@ -810,7 +810,7 @@ DEBUG=autorent:*
 - **Traductions** : Ajouter de nouvelles langues
 - **Documentation** : Améliorer et étendre la documentation
 
-## 📄 Licence et Crédits
+## 9. Licence et Crédits
 
 ### **Licence**
 Ce projet est sous licence MIT ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg). Voir le fichier `LICENSE` pour plus de détails.
@@ -832,7 +832,7 @@ Merci à toutes les bibliothèques open source qui ont rendu ce projet possible 
 
 ---
 
-## 🎉 Conclusion
+##  Conclusion
 
 AutoRent Cherkaoui est une solution complète et moderne pour la gestion de location de voitures. Avec son interface bilingue, ses fonctionnalités avancées et sa architecture robuste, elle répond aux besoins spécifiques du marché marocain tout en offrant une expérience utilisateur exceptionnelle.
 
@@ -840,5 +840,5 @@ L'application est conçue pour évoluer avec votre entreprise, avec des fonction
 
 Pour toute question ou assistance, n'hésitez pas à consulter la documentation ou à contacter l'équipe de support.
 
-**Bonne utilisation d'AutoRent Cherkaoui ! 🚗✨**
+**Bonne utilisation de Cherkaoui AutoRent  ! 🚗✨..**
 
