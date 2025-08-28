@@ -53,15 +53,15 @@ Cette solution moderne combine une interface utilisateur intuitive avec un backe
 
 
 ## Table des Matières
-1. [Description](#-Description)
-2. [Fonctionnalités](#-fonctionnalités-principales)
-3. [Technologies](#-technologies-utilisées)
-4. [Installation](#-installation-et-configuration-windows)
-5. [Utilisation](#-guide-dutilisation)
-6. [API](#-documentation-de-lapi)
-7. [Déploiement](#-déploiement-en-production)
-8. [Contribution](#-support-et-contribution)
-9. [Licence](#-licence)
+1. [Description](#1.Description)
+2. [Fonctionnalités](#2.fonctionnalités-principales)
+3. [Technologies](#3.technologies-utilisées)
+4. [Installation](#4.installation-et-configuration-windows)
+5. [Utilisation](#5.guide-dutilisation)
+6. [API](#6.documentation-de-lapi)
+7. [Déploiement](#7.déploiement-en-production)
+8. [Contribution](#8.support-et-contribution)
+9. [Licence](#9.licence)
 
 
 ## 2. Fonctionnalités Principales
