@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 // const url = `http://localhost:5001/api/vehicles?${searchParams.toString()}`;
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5001/api";
-    const url = `${API_BASE_URL}/vehicles?${searchParams.toString()}`;
+   
 // API réelle pour communiquer avec votre backend
 const vehiclesAPI = {
   getToken() {
@@ -33,7 +33,7 @@ const vehiclesAPI = {
     if (params.status) searchParams.append("status", params.status);
     if (params.sortBy) searchParams.append("sortBy", params.sortBy);
     if (params.sortOrder) searchParams.append("sortOrder", params.sortOrder);
-    
+     const url = `${API_BASE_URL}/vehicles?${searchParams.toString()}`;
     console.log("Fetching vehicles from:", url);
     const token = vehiclesAPI.getToken();
     const response = await fetch(url, {
