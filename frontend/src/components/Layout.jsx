@@ -33,7 +33,7 @@ const Layout = ({ children, currentPage, onPageChange, user, onLogout }) => {
     ] : []),
     { id: 'contracts', icon: FileText, label: t('contracts') },
     // { id: 'maintenance', icon: Wrench, label: t('maintenance') },
-    { id: 'reports', icon: BarChart3, label: t('reports') },
+    // { id: 'reports', icon: BarChart3, label: t('reports') },
     { id: 'settings', icon: Settings, label: t('settings') }
   ];
 
