@@ -953,7 +953,7 @@ const VehicleManagement = ({ vehicleRefreshFlag = 0 }) => {
             {/* Image du véhicule */}
             {vehicle.image ? (
               <img
-                src={`${UPLOADS_BASE_URL}/uploads/${vehicle.image.replace(/\\/g, "/")}`}
+                src={`${UPLOADS_BASE_URL}/${vehicle.image.replace(/\\/g, "/")}`}
                 alt={`${vehicle.brand} ${vehicle.model}`}
                 className="w-full h-48 object-cover rounded-t-lg"
               />
