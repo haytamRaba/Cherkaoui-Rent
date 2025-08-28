@@ -11,14 +11,17 @@ Cherkaoui AutoRent  est une application web complète de gestion de location de 
 Cette solution moderne combine une interface utilisateur intuitive avec un backend robuste pour offrir une expérience de gestion complète, de la réservation à la facturation, en passant par la maintenance des véhicules.
 
 ## Apercu
-![Login Screenshot](./login.png)
-![Dashboard Screenshot](./dashboard.png)
-![Vehicle Screenshot](./Vehicules.png)
-![Clients Screenshot](./Clients.png)
-![Booking Screenshot](./Reservation.png)
-![Contract Screenshot](./Contracts.png)
-![Settings update Screenshot](./Settings-update-Info.png)
-![Settings Add Screenshot](./Settings-add-user.png)
+<p align="center">
+  <img src="./login.png" alt="Login Screenshot" width="50%" style="margin:10px;">
+  <img src="./Dashboard.png" alt="Dashboard Screenshot" width="50%" style="margin:10px;">
+  <img src="./Vehicules.png" alt="Vehicle Screenshot" width="50%" style="margin:10px;">
+  <img src="./Clients.png" alt="Clients Screenshot" width="50%" style="margin:10px;">
+  <img src="./Reservation.png" alt="Booking Screenshot" width="50%" style="margin:10px;">
+  <img src="./Contracts.png" alt="Contract Screenshot" width="50%" style="margin:10px;">
+  <img src="./Settings-update-Info.png" alt="Settings Update Screenshot" width="50%" style="margin:10px;">
+  <img src="./Settings-add-user.png" alt="Settings Add Screenshot" width="50%" style="margin:10px;">
+</p>
+
 
 ## Table des Matières
 1. [Description](#-description)
