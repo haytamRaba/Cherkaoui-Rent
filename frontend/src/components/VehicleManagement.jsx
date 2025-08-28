@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 // const url = `http://localhost:5001/api/vehicles?${searchParams.toString()}`;
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5001/api";
-   
+   const UPLOADS_BASE_URL = import.meta.env.VITE_API_BASE_URL?.replace('/api', '') || "http://localhost:5001";
 // API réelle pour communiquer avec votre backend
 const vehiclesAPI = {
   getToken() {
@@ -953,10 +953,7 @@ const VehicleManagement = ({ vehicleRefreshFlag = 0 }) => {
             {/* Image du véhicule */}
             {vehicle.image ? (
               <img
-                src={`${API_BASE_URL}/${vehicle.image.replace(
-                  /\\/g,
-                  "/"
-                )}`}
+                src={`${UPLOADS_BASE_URL}/uploads/${vehicle.image.replace(/\\/g, "/")}`}
                 alt={`${vehicle.brand} ${vehicle.model}`}
                 className="w-full h-48 object-cover rounded-t-lg"
               />
