@@ -11,16 +11,45 @@ Cherkaoui AutoRent  est une application web complète de gestion de location de 
 Cette solution moderne combine une interface utilisateur intuitive avec un backend robuste pour offrir une expérience de gestion complète, de la réservation à la facturation, en passant par la maintenance des véhicules.
 
 ## Apercu
-<p align="center">
-  <img src="./login.png" alt="Login Screenshot" width="50%" style="margin:10px;">
-  <img src="./Dashboard.png" alt="Dashboard Screenshot" width="50%" style="margin:10px;">
-  <img src="./Vehicules.png" alt="Vehicle Screenshot" width="50%" style="margin:10px;">
-  <img src="./Clients.png" alt="Clients Screenshot" width="50%" style="margin:10px;">
-  <img src="./Reservation.png" alt="Booking Screenshot" width="50%" style="margin:10px;">
-  <img src="./Contracts.png" alt="Contract Screenshot" width="50%" style="margin:10px;">
-  <img src="./Settings-update-Info.png" alt="Settings Update Screenshot" width="50%" style="margin:10px;">
-  <img src="./Settings-add-user.png" alt="Settings Add Screenshot" width="50%" style="margin:10px;">
-</p>
+<table>
+  <tr>
+    <td align="center">
+      <img src="./login.png" alt="Login Screenshot" width="200px"><br>
+      Login Screenshot
+    </td>
+    <td align="center">
+      <img src="./Dashboard.png" alt="Dashboard Screenshot" width="200px"><br>
+      Dashboard Screenshot
+    </td>
+    <td align="center">
+      <img src="./Vehicules.png" alt="Vehicle Screenshot" width="200px"><br>
+      Vehicle Screenshot
+    </td>
+    <td align="center">
+      <img src="./Clients.png" alt="Clients Screenshot" width="200px"><br>
+      Clients Screenshot
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./Reservation.png" alt="Booking Screenshot" width="200px"><br>
+      Booking Screenshot
+    </td>
+    <td align="center">
+      <img src="./Contracts.png" alt="Contract Screenshot" width="200px"><br>
+      Contract Screenshot
+    </td>
+    <td align="center">
+      <img src="./Settings-update-Info.png" alt="Settings Update Screenshot" width="200px"><br>
+      Settings Update
+    </td>
+    <td align="center">
+      <img src="./Settings-add-user.png" alt="Settings Add Screenshot" width="200px"><br>
+      Settings Add
+    </td>
+  </tr>
+</table>
+
 
 
 ## Table des Matières
