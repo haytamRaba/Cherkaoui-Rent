@@ -77,8 +77,8 @@ function App() {
         return <ContractGenerator />;
       // case "maintenance":
       //   return <div>Maintenance (à implémenter)</div>;
-      case "reports":
-        return <Reports/>;
+      // case "reports":
+      //   return <Reports/>;
       case "settings":
         return <Settings />;
       default:
