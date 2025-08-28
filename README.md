@@ -756,7 +756,7 @@ DEBUG=autorent:*
 
 ### **Licence**
 Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
-
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ### **Crédits**
 - **Développé par** : Haytam Raba & Youssef Najih
 - **Conçu pour** : AutoRent Cherkaoui
