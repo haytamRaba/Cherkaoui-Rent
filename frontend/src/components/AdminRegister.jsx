@@ -45,9 +45,9 @@ export default function AdminRegister() {
   };
 
   return (
-    <div className="max-w-md w-full mx-auto bg-white rounded-xl shadow-lg p-8 border border-gray-200">
-      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-        {t("Créer un compte admin")}
+    <div className="contents max-w-md w-full mx-auto bg-white rounded-xl shadow-lg p-8 border border-gray-200">
+      <h2 className="text-2xl font-bold mb-6  text-gray-700 flex items-center justify-between">
+        {t("ajouter un utilisateur admin")}
       </h2>
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
@@ -58,7 +58,7 @@ export default function AdminRegister() {
     name="username"
     value={form.username}
     onChange={handleChange}
-    placeholder={t("Nom d’utilisateur")}
+    placeholder={t("Nom utilisateur ")}
     required
     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
   />
@@ -128,7 +128,7 @@ export default function AdminRegister() {
           disabled={loading}
           className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition duration-150"
         >
-          {loading ? t("Création...") : t("Créer")}
+          {loading ? t("Création...") : t("ajout")}
         </button>
         {error && (
           <div className="text-red-600 text-sm text-center mt-2">{error}</div>

@@ -56,21 +56,21 @@ const Login = ({ onLogin }) => {
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
              Cherkaoui AutoRent
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
+          {/* <p className="mt-2 text-sm text-gray-600">
             {showRegisterForm ? t("Créer un compte admin") : t("Connectez-vous à votre compte")}
-          </p>
+          </p> */}
         </div>
 
         <Card>
           <CardHeader>
+
             <CardTitle className="text-center">
               {showRegisterForm ? t("Création de compte") : t("Connexion")}
             </CardTitle>
+
           </CardHeader>
           <CardContent>
-            {showRegisterForm ? (
-              <AdminRegister />
-            ) : (
+            {/* {showRegisterForm ? (<AdminRegister />) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 {error && (
                   <Alert variant="destructive">
@@ -119,18 +119,63 @@ const Login = ({ onLogin }) => {
                   )}
                 </Button>
               </form>
-            )}
+            )} */}
 
-            <div className="mt-6 text-center">
-              <button
-                onClick={() => setShowRegisterForm(!showRegisterForm)}
-                className="text-sm text-blue-600 hover:underline"
-              >
-                {showRegisterForm ? t("Retour à la connexion") : t("Créer un compte admin ici")}
-              </button>
-            </div>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {error && (
+                  <Alert variant="destructive">
+                    <AlertDescription>{error}</AlertDescription>
+                  </Alert>
+                )}
+
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="votre@email.com"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="password">Mot de passe</Label>
+                  <Input
+                    id="password"
+                    name="password"
+                    type="password"
+                    required
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="••••••••"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={loading}
+                >
+                  {loading ? (
+                    'Connexion...'
+                  ) : (
+                    <>
+                      <LogIn className="h-4 w-4 mr-2" />
+                      Se connecter
+                    </>
+                  )}
+                </Button>
+              </form>
+
+
+          
+
           </CardContent>
         </Card>
+
       </div>
     </div>
   );

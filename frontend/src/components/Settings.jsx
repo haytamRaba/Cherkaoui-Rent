@@ -6,12 +6,13 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Eye, EyeOff, Edit, Save, X } from "lucide-react";
 import { authAPI } from "../services/api";
-
+import AdminRegister from "./AdminRegister";
 const Settings = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+  //add new utilisateur
+  //  const [showRegisterForm, setShowRegisterForm] = useState(false); 
   // États pour l'édition
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [editData, setEditData] = useState({
@@ -321,9 +322,19 @@ const Settings = () => {
           ) : (
             <div className="text-gray-500">Aucune donnée utilisateur trouvée</div>
           )}
+            {/* <div className="mt-6 text-center">
+              <button
+                onClick={() => setShowRegisterForm(!showRegisterForm)}
+                className="text-sm text-blue-600 hover:underline"
+              >
+                {showRegisterForm ? t("Retour à la connexion") : t("Créer un compte admin ici")}
+              </button>
+            </div> */}
+           
         </CardContent>
       </Card>
-
+      <hr/>
+      <AdminRegister />
       {/* Section Sécurité */}
       {/* <Card>
         <CardHeader>
