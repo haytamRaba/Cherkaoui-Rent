@@ -1,10 +1,36 @@
-# AutoRent Cherkaoui - Système de Gestion de Location de Voitures
+#  Cherkaoui Auto Rent - Système de Gestion de Location de Voitures
 
-## 🚗 Description
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Node.js](https://img.shields.io/badge/Node.js-18+-green)
+![React](https://img.shields.io/badge/React-18+-blue)
+![MongoDB](https://img.shields.io/badge/MongoDB-6.0+-brightgreen)
 
-AutoRent Cherkaoui est une application web complète de gestion de location de voitures développée spécifiquement pour les entreprises de location au Maroc. L'application offre une interface bilingue (français/arabe) avec support RTL complet et toutes les fonctionnalités nécessaires pour gérer efficacement une entreprise de location de véhicules.
+##  Description
 
+Cherkaoui AutoRent  est une application web complète de gestion de location de voitures développée spécifiquement pour les entreprises de location au Maroc. L'application offre une interface bilingue (français/arabe) avec support RTL complet et toutes les fonctionnalités nécessaires pour gérer efficacement une entreprise de location de véhicules.
 Cette solution moderne combine une interface utilisateur intuitive avec un backend robuste pour offrir une expérience de gestion complète, de la réservation à la facturation, en passant par la maintenance des véhicules.
+
+## Apercu
+![Login Screenshot](./login.png)
+![Dashboard Screenshot](./dashboard.png)
+![Vehicle Screenshot](./Vehicules.png)
+![Clients Screenshot](./Clients.png)
+![Booking Screenshot](./Reservation.png)
+![Contract Screenshot](./Contracts.png)
+![Settings update Screenshot](./Settings-update-Info.png)
+![Settings Add Screenshot](./Settings-add-user.png)
+
+## Table des Matières
+1. [Description](#-description)
+2. [Fonctionnalités](#-fonctionnalités-principales)
+3. [Technologies](#-technologies-utilisées)
+4. [Installation](#-installation-et-configuration-windows)
+5. [Utilisation](#-guide-dutilisation)
+6. [API](#-documentation-de-lapi)
+7. [Déploiement](#-déploiement-en-production)
+8. [Contribution](#-support-et-contribution)
+9. [Licence](#-licence)
+
 
 ## ✨ Fonctionnalités Principales
 
