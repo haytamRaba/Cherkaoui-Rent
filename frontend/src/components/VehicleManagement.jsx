@@ -15,7 +15,9 @@ import {
   EyeOff,
   Filter,
 } from "lucide-react";
-
+// const url = `http://localhost:5001/api/vehicles?${searchParams.toString()}`;
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5001/api";
+    const url = `${API_BASE_URL}/vehicles?${searchParams.toString()}`;
 // API réelle pour communiquer avec votre backend
 const vehiclesAPI = {
   getToken() {
@@ -31,7 +33,7 @@ const vehiclesAPI = {
     if (params.status) searchParams.append("status", params.status);
     if (params.sortBy) searchParams.append("sortBy", params.sortBy);
     if (params.sortOrder) searchParams.append("sortOrder", params.sortOrder);
-    const url = `http://localhost:5001/api/vehicles?${searchParams.toString()}`;
+    
     console.log("Fetching vehicles from:", url);
     const token = vehiclesAPI.getToken();
     const response = await fetch(url, {
@@ -57,7 +59,7 @@ const vehiclesAPI = {
       );
     }
     const token = vehiclesAPI.getToken();
-    const response = await fetch("http://localhost:5001/api/vehicles", {
+    const response = await fetch(`${API_BASE_URL}/vehicles`, {
       method: "POST",
       body: formData,
       headers: {
@@ -94,7 +96,7 @@ const vehiclesAPI = {
       );
     }
     const token = vehiclesAPI.getToken();
-    const response = await fetch(`http://localhost:5001/api/vehicles/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/vehicles/${id}`, {
       method: "PUT",
       body: formData,
       headers: {
@@ -124,7 +126,7 @@ const vehiclesAPI = {
   async delete(id) {
     console.log("Suppression du véhicule:", id);
     const token = vehiclesAPI.getToken();
-    const response = await fetch(`http://localhost:5001/api/vehicles/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/vehicles/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -475,7 +477,8 @@ const VehicleManagement = ({ vehicleRefreshFlag = 0 }) => {
     setShowForm(true);
     setImagePreview(
       vehicle.image
-        ? `http://localhost:5001/${vehicle.image.replace(/\\/g, "/")}`
+        ? `${API_BASE_URL}/${vehicle.image.replace(/\\/g, "/")}`
+        
         : null
     );
   };
@@ -950,7 +953,7 @@ const VehicleManagement = ({ vehicleRefreshFlag = 0 }) => {
             {/* Image du véhicule */}
             {vehicle.image ? (
               <img
-                src={`http://localhost:5001/${vehicle.image.replace(
+                src={`${API_BASE_URL}/${vehicle.image.replace(
                   /\\/g,
                   "/"
                 )}`}
